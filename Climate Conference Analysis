@@ -1,0 +1,36 @@
+Climate Conference Project
+Database: https://www.db-fiddle.com/f/pxMci1sLL945KHKYvpe9W6/1
+
+-- LEFT JOIN: List all VIPS that have confirmed hotel reservations.
+SELECT vips.last_name, vips.first_name, reservations.hotel
+FROM vips
+LEFT JOIN reservations
+ON vip.member_id = reservations.member_id;
+
+-- INNER JOIN: What VIPS will speak at the conference and what are their event types?
+SELECT events.event_name, events.event_type, vips.first_name, vips.last_name
+FROM vips
+INNER JOIN events
+ON vips.event = events.event_id;
+
+-- MULTIPLE JOIN: What VIP speakers have set reservations for the thnk you dinner?
+SELECT vips.last_name, vips.first_name
+FROM vips
+INNER JOIN events
+ON vip.event = events.event_id
+LEFT JOIN reservations
+ON vips.member_id = reservations.member_id
+WHERE reservations.dinner_rsvp = "1";
+
+-- SELF JOIN: List the VIPs speaking and who they are receiving feedbck from.
+SELECT v1.first_name AS feedback_giver, v1.last_name AS giver_last, 
+       v2.first_name AS feedback_receiver, v2.last_name AS receiver_last
+FROM vips v1
+JOIN vips v2 ON v1.provides_feedback_to = v2.member_id;
+
+-- Custom query: List the educator association VIPs that have a confirmed reservation for the dinner?
+SELECT DISTINCT vips.first_name, vips.last_name, vips.association
+FROM vips
+LEFT JOIN reservations
+WHERE reservations.dinner_rsvp IN 
+(SELECT dinner_rsvp FROM reservations WHERE dinner_rsvp = "1");
