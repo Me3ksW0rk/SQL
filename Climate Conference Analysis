@@ -20,7 +20,7 @@ INNER JOIN events
 ON vip.event = events.event_id
 LEFT JOIN reservations
 ON vips.member_id = reservations.member_id
-WHERE reservations.dinner_rsvp = "1";
+WHERE reservations.dinner_rsvp = 1;
 
 -- SELF JOIN: List the VIPs speaking and who they are receiving feedbck from.
 SELECT v1.first_name AS feedback_giver, v1.last_name AS giver_last, 
@@ -33,4 +33,4 @@ SELECT DISTINCT vips.first_name, vips.last_name, vips.association
 FROM vips
 LEFT JOIN reservations
 WHERE reservations.dinner_rsvp IN 
-(SELECT dinner_rsvp FROM reservations WHERE dinner_rsvp = "1");
+(SELECT dinner_rsvp FROM reservations WHERE dinner_rsvp = 1);
