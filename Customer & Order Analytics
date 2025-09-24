@@ -59,3 +59,5 @@ WHERE Product LIKE '%Headphones%'
 AND length(orderid) = 6
 AND orderid <> 'Order ID'
 GROUP BY Product
+
+#9. 
