@@ -53,6 +53,7 @@ AND length(orderid) = 6
 AND orderid <>'Order ID';
 
 #8. How many of each type of headphone were sold in February?
+--In other words, what is the sum of the quantity of products sold that have “headphones” in the name from the February dataset? Group the results by product.
 SELECT SUM(Quantity), Product
 FROM BIT_DB.FebSales
 WHERE Product LIKE '%Headphones%'
@@ -60,4 +61,13 @@ AND length(orderid) = 6
 AND orderid <> 'Order ID'
 GROUP BY Product
 
-#9. 
+#9. What was the average amount spent per account in February?
+--In other words, what is the average amount spent / number of accounts, not the amount spent by each account.
+SELECT avg(Quantity*price)
+FROM BIT_DB.FebSales Feb
+JOIN BIT_DB.customers cust
+ON Feb.orderID = cust.order_id
+WHERE length(orderid) = 6
+AND orderid <> 'Order ID';
+
+#10. 
